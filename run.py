@@ -195,7 +195,10 @@ if args.analysis_level == "participant":
     fst_links_to_make = ["fsaverage", "lh.EC_average","rh.EC_average"]
     for fst in fst_links_to_make:
         try:
-            os.symlink(os.path.join(os.environ["SUBJECTS_DIR"], fst),os.path.join(output_dir, fst))
+            dst = os.path.join(output_dir, fst)
+            if not os.path.isdir(dst):
+                os.makedirs(dst)
+            os.symlink(os.path.join(os.environ["SUBJECTS_DIR"], fst),dst)
         except OSError as e:
             if e.errno == errno.EEXIST:
                 print("Symbolic link to {0} already exists".format(fst))

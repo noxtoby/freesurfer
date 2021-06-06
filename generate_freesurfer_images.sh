@@ -49,7 +49,7 @@ docker run --rm ${image} generate docker \
     libsm-dev libx11-dev libxt-dev libxext-dev libglu1-mesa libpython2.7-stdlib\
   --freesurfer version=6.0.1 install_path=/opt/freesurfer \
   --miniconda use_env=base conda_install="python=3 pip pandas setuptools pandas=0.21.0" pip_install="nibabel" \
-  --run-bash 'curl -sL https://deb.nodesource.com/setup_6.x | bash -' \
+  --run-bash 'curl -sL https://deb.nodesource.com/setup_14.x | bash -' \
   --install nodejs \
   --run-bash 'npm install -g bids-validator@0.19.8' \
   --env FSLDIR=/usr/share/fsl/5.0 FSLOUTPUTTYPE=NIFTI_GZ \
@@ -79,7 +79,7 @@ docker run --rm ${image} generate docker \
     libsm-dev libx11-dev libxt-dev libxext-dev libglu1-mesa libpython2.7-stdlib\
   --freesurfer version=7.1.1 install_path=/opt/freesurfer \
   --miniconda use_env=base conda_install="python=3 pip pandas setuptools pandas=0.21.0" pip_install="nibabel" \
-  --run-bash 'curl -sL https://deb.nodesource.com/setup_6.x | bash -' \
+  --run-bash 'curl -sL https://deb.nodesource.com/setup_14.x | bash -' \
   --install nodejs \
   --run-bash 'npm install -g bids-validator@0.19.8' \
   --env FSLDIR=/usr/share/fsl/5.0 FSLOUTPUTTYPE=NIFTI_GZ \
@@ -111,7 +111,7 @@ docker run --rm ${image} generate singularity \
     libsm-dev libx11-dev libxt-dev libxext-dev libglu1-mesa libpython2.7-stdlib\
   --freesurfer version=6.0.1 install_path=/opt/freesurfer \
   --miniconda use_env=base conda_install="python=3 pip pandas setuptools pandas=0.21.0" pip_install="nibabel" \
-  --run-bash 'curl -sL https://deb.nodesource.com/setup_6.x | bash -' \
+  --run-bash 'curl -sL https://deb.nodesource.com/setup_14.x | bash -' \
   --install nodejs \
   --run-bash 'npm install -g bids-validator@0.19.8' \
   --env FSLDIR=/usr/share/fsl/5.0 FSLOUTPUTTYPE=NIFTI_GZ \
@@ -131,7 +131,7 @@ docker run --rm ${image} generate singularity \
   --copy run.py '/run.py' \
   --run  'chmod +x /run.py' \
   --copy version '/version' \
-  --entrypoint '/neurodocker/startup.sh /run.py' \
+  --entrypoint '/neurodocker/startup.sh /run.py "$@"' \
 > Singularity
 
 
@@ -142,7 +142,7 @@ docker run --rm ${image} generate singularity \
     libsm-dev libx11-dev libxt-dev libxext-dev libglu1-mesa libpython2.7-stdlib\
   --freesurfer version=7.1.1 install_path=/opt/freesurfer \
   --miniconda use_env=base conda_install="python=3 pip pandas setuptools pandas=0.21.0" pip_install="nibabel" \
-  --run-bash 'curl -sL https://deb.nodesource.com/setup_6.x | bash -' \
+  --run-bash 'curl -sL https://deb.nodesource.com/setup_14.x | bash -' \
   --install nodejs \
   --run-bash 'npm install -g bids-validator@0.19.8' \
   --env FSLDIR=/usr/share/fsl/5.0 FSLOUTPUTTYPE=NIFTI_GZ \
@@ -162,5 +162,5 @@ docker run --rm ${image} generate singularity \
   --copy run.py '/run.py' \
   --run  'chmod +x /run.py' \
   --copy version '/version' \
-  --entrypoint '/neurodocker/startup.sh /run.py' \
+  --entrypoint '/neurodocker/startup.sh /run.py "$@"' \
 > Singularity_fs7

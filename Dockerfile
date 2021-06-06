@@ -7,7 +7,7 @@
 # 
 #     https://github.com/ReproNim/neurodocker
 # 
-# Timestamp: 2020/11/02 20:18:23 UTC
+# Timestamp: 2021/06/06 14:03:44 UTC
 
 FROM ubuntu:xenial
 
@@ -119,7 +119,7 @@ RUN export PATH="/opt/miniconda-latest/bin:$PATH" \
     && rm -rf ~/.cache/pip/* \
     && sync
 
-RUN bash -c 'curl -sL https://deb.nodesource.com/setup_6.x | bash -'
+RUN bash -c 'curl -sL https://deb.nodesource.com/setup_14.x | bash -'
 
 RUN apt-get update -qq \
     && apt-get install -y -q --no-install-recommends \
@@ -219,7 +219,7 @@ RUN echo '{ \
     \n    ], \
     \n    [ \
     \n      "run_bash", \
-    \n      "curl -sL https://deb.nodesource.com/setup_6.x | bash -" \
+    \n      "curl -sL https://deb.nodesource.com/setup_14.x | bash -" \
     \n    ], \
     \n    [ \
     \n      "install", \

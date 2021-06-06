@@ -7,7 +7,7 @@
 # 
 #     https://github.com/ReproNim/neurodocker
 # 
-# Timestamp: 2020/11/02 20:18:27 UTC
+# Timestamp: 2021/06/06 14:03:47 UTC
 
 Bootstrap: docker
 From: ubuntu:xenial
@@ -111,7 +111,7 @@ rm -rf ~/.cache/pip/*
 sync
 
 
-bash -c 'curl -sL https://deb.nodesource.com/setup_6.x | bash -'
+bash -c 'curl -sL https://deb.nodesource.com/setup_14.x | bash -'
 
 apt-get update -qq
 apt-get install -y -q --no-install-recommends \
@@ -190,7 +190,7 @@ echo '{
 \n    ],
 \n    [
 \n      "run_bash",
-\n      "curl -sL https://deb.nodesource.com/setup_6.x | bash -"
+\n      "curl -sL https://deb.nodesource.com/setup_14.x | bash -"
 \n    ],
 \n    [
 \n      "install",
@@ -268,7 +268,7 @@ echo '{
 \n    ],
 \n    [
 \n      "entrypoint",
-\n      "/neurodocker/startup.sh /run.py"
+\n      "/neurodocker/startup.sh /run.py \"$@\""
 \n    ]
 \n  ]
 \n}' > /neurodocker/neurodocker_specs.json
@@ -311,4 +311,4 @@ run.py /run.py
 version /version
 
 %runscript
-/neurodocker/startup.sh /run.py
+/neurodocker/startup.sh /run.py "$@"
