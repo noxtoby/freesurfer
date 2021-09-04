@@ -289,7 +289,7 @@ if args.analysis_level == "participant":
                 if 'template' in args.steps:
                     # creating a subject specific template
                     input_args = " ".join(["-tp %s" % tp for tp in timepoints])
-                    fsid = "sub-%s" % subject_label
+                    fsid = "sub-%s_template" % subject_label
                     stages = " ".join(["-" + stage for stage in args.stages])
 
                     cmd = "recon-all -base %s -sd %s %s %s -openmp %d" % (fsid,
@@ -316,7 +316,7 @@ if args.analysis_level == "participant":
                 if 'longitudinal' in args.steps:
                     for tp in timepoints:
                         # longitudinally process all timepoints
-                        fsid = "sub-%s" % subject_label
+                        fsid = "sub-%s_template" % subject_label
                         stages = " ".join(["-" + stage for stage in args.stages])
 
                         cmd = "recon-all -long %s %s -sd %s %s -openmp %d" % (tp,

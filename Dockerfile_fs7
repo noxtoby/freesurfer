@@ -15,6 +15,9 @@ USER root
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
+LABEL organisation="E-DADS" \
+      freesurfer.version="7.1.1"
+
 ENV LANG="en_US.UTF-8" \
     LC_ALL="en_US.UTF-8" \
     ND_ENTRYPOINT="/neurodocker/startup.sh"
