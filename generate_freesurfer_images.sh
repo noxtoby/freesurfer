@@ -47,7 +47,7 @@ docker run --rm ${image} generate docker \
   --pkg-manager apt \
   --install tcsh bc tar libgomp1 perl-modules wget curl \
     libsm-dev libx11-dev libxt-dev libxext-dev libglu1-mesa libpython2.7-stdlib\
-  --freesurfer version=6.0.1 install_path=/opt/freesurfer \
+  --freesurfer version=5.3.0 install_path=/opt/freesurfer \
   --miniconda use_env=base conda_install="python=3 pip pandas setuptools pandas=0.21.0" pip_install="nibabel" \
   --run-bash 'curl -sL https://deb.nodesource.com/setup_14.x | bash -' \
   --install nodejs \
@@ -70,7 +70,7 @@ docker run --rm ${image} generate docker \
   --run  'chmod +x /run.py' \
   --copy version '/version' \
   --entrypoint '/neurodocker/startup.sh /run.py' \
-> Dockerfile
+> Dockerfile_fs5
 
 docker run --rm ${image} generate docker \
   --base ubuntu:xenial \
@@ -109,7 +109,7 @@ docker run --rm ${image} generate singularity \
   --pkg-manager apt \
   --install tcsh bc tar libgomp1 perl-modules wget curl \
     libsm-dev libx11-dev libxt-dev libxext-dev libglu1-mesa libpython2.7-stdlib\
-  --freesurfer version=6.0.1 install_path=/opt/freesurfer \
+  --freesurfer version=5.3.0 install_path=/opt/freesurfer \
   --miniconda use_env=base conda_install="python=3 pip pandas setuptools pandas=0.21.0" pip_install="nibabel" \
   --run-bash 'curl -sL https://deb.nodesource.com/setup_14.x | bash -' \
   --install nodejs \
