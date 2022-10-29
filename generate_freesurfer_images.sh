@@ -40,16 +40,17 @@
 ###############################################################################
 
 # image="repronim/neurodocker@sha256:291c40c8efce92260822b6ef40f88c300d77d09f08d577f55c46ef7c4b43d2e5"
-image="noxtoby/neurodocker"
+# image="noxtoby/neurodocker"
+image="repronim/neurodocker:0.7.0"
 
 # Generate a dockerfile for building BIDS-Apps Freesurfer container
 docker run --rm ${image} generate docker \
-  --base-image ubuntu:xenial \
+  --base ubuntu:xenial \
   --pkg-manager apt \
   --install tcsh bc tar libgomp1 perl-modules wget curl \
     libsm-dev libx11-dev libxt-dev libxext-dev libglu1-mesa libpython2.7-stdlib\
-  --freesurfer version=5.3.0 install_path=/opt/freesurfer \
-  --miniconda use_env=base conda_install="python=3 pip pandas setuptools pandas=0.21.0" pip_install="nibabel" \
+  --freesurfer version=6.0.1 install_path=/opt/freesurfer \
+  --miniconda use_env=base conda_install="python=3 pip pandas setuptools" pip_install="nibabel" \
   --run-bash 'curl -sL https://deb.nodesource.com/setup_14.x | bash -' \
   --install nodejs \
   --run-bash 'npm install -g bids-validator@0.19.8' \
