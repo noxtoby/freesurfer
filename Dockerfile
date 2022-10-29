@@ -15,8 +15,12 @@ USER root
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
-ENV LANG="en_US.UTF-8" \
-    LC_ALL="en_US.UTF-8" \
+# LANG must not be UTF because it messes with MNI tools (perl pre-5.18.0 doesn't like UTF): https://surfer.nmr.mgh.harvard.edu/fswiki/FreeSurferSegmentation
+# ENV LANG="en_US.UTF-8" \
+#     LC_ALL="en_US.UTF-8" \
+#     ND_ENTRYPOINT="/neurodocker/startup.sh"
+ENV LANG="C" \
+    LC_ALL="C" \
     ND_ENTRYPOINT="/neurodocker/startup.sh"
 RUN export ND_ENTRYPOINT="/neurodocker/startup.sh" \
     && apt-get update -qq \
@@ -29,9 +33,9 @@ RUN export ND_ENTRYPOINT="/neurodocker/startup.sh" \
            unzip \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
-    && sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
+    && sed -i -e 's/# C en_US en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
     && dpkg-reconfigure --frontend=noninteractive locales \
-    && update-locale LANG="en_US.UTF-8" \
+    && update-locale LANG="C" \
     && chmod 777 /opt && chmod a+s /opt \
     && mkdir -p /neurodocker \
     && if [ ! -f "$ND_ENTRYPOINT" ]; then \
@@ -111,7 +115,6 @@ RUN export PATH="/opt/miniconda-latest/bin:$PATH" \
            "pip" \
            "pandas" \
            "setuptools" \
-           "pandas=0.21.0" \
     && sync && conda clean -y --all && sync \
     && bash -c "source activate base \
     &&   pip install --no-cache-dir  \
