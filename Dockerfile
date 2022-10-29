@@ -15,8 +15,10 @@ USER root
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
-ENV LANG="en_US.UTF-8" \
-    LC_ALL="en_US.UTF-8" \
+# LANG must not be UTF because it messes with MNI tools (perl doesn't like UTF): https://surfer.nmr.mgh.harvard.edu/fswiki/FreeSurferSegmentation
+
+ENV LANG="en_US" \
+    LC_ALL="en_US" \
     ND_ENTRYPOINT="/neurodocker/startup.sh"
 RUN export ND_ENTRYPOINT="/neurodocker/startup.sh" \
     && apt-get update -qq \
@@ -76,7 +78,7 @@ RUN apt-get update -qq \
     && rm -rf /var/lib/apt/lists/* \
     && echo "Downloading FreeSurfer ..." \
     && mkdir -p /opt/freesurfer \
-    && curl -fsSL --retry 5 ftp://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/6.0.1/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.1.tar.gz \
+    && curl -fsSL --retry 5 ftp://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/5.3.0/freesurfer-Linux-centos6_x86_64-stable-pub-v5.3.0.tar.gz \
     | tar -xz -C /opt/freesurfer --strip-components 1 \
          --exclude='freesurfer/average/mult-comp-cor' \
          --exclude='freesurfer/lib/cuda' \
