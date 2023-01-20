@@ -111,6 +111,10 @@ parser.add_argument('--3T',
                     help='enables the two 3T specific options that recon-all supports: nu intensity correction params, and the special schwartz atlas',
                     choices = ['true', 'false'],
                     default = 'true')
+parser.add_argument('--cw256',
+                    help='if set to true, mri_convert conforms images with a FOV > 256 to dimensions of 256^3',
+                    choices = ['true', 'false'],
+                    default = 'false')
 args = parser.parse_args()
 
 
